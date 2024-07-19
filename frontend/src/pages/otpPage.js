@@ -1,23 +1,27 @@
 import { useSelector } from "react-redux";
 import Navbar from "../components/navbar";
-const { useState } = require("react");
+import useGenerateNewOtp from "../hooks/useGenerateNewOtp";
+const { useState, useEffect } = require("react");
 
 const OtpPage = () => {
   const { email } = useSelector((e) => e.auth);
   const [otp, setOtp] = useState();
-
+  const { generateNewOtp } = useGenerateNewOtp();
   const handleSubmit = () => {
     if (otp.length < 4) {
       alert("Invalid otp");
     } else {
       const num = parseInt(otp);
       if (num >= 1000 && num <= 9999) {
-        alert(num);
+        // generateNewOtp();
       } else {
         alert("Invalid otp, OTP mush be a number");
       }
     }
   };
+  useEffect(() => {
+    generateNewOtp();
+  }, []);
 
   return (
     <>
