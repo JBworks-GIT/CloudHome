@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import appStore from "./src/store/appStore";
 import AppRouter from "./appRouter";
 //const app = <h1>hello</h1>  is a element(react)
+import "./globalStyles.css";
 
 const App = () => {  
   return (

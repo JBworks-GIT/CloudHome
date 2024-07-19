@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import Homepage from "./src/pages/homePage";
 import OtpPage from "./src/pages/otpPage";
-
 const AppRouter = () => {
   const { isAuthorized, isEmailVerified } = useSelector((e) => e.auth);
 
@@ -27,9 +26,7 @@ const AppRouter = () => {
     {
       path: "/",
       element: isAuthorized ? (
-        <>
-          (isEmailVerified)? <Homepage /> : <Navigate to="/otp" />
-        </>
+        <>{isEmailVerified ? <Homepage /> : <Navigate to="/otp" />}</>
       ) : (
         <Navigate to="/login" />
       ),

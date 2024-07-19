@@ -1,0 +1,48 @@
+.otp-page-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 24px;
+    padding: 24px;
+    background-color: aquamarine;
+    gap: 24px;
+    border-radius: 8px;
+
+    .otp-input-container{
+        /* width: 212px; */
+        overflow: hidden;
+        position: relative;
+        input{
+            padding: 8px;
+            font-size: 24px;
+            letter-spacing: 48px;
+            width: 260px;
+            border: 0;
+            outline: 0;
+        }
+
+
+        .otp-column{
+            position: absolute;
+            top: 0;
+            height: 42px;
+            width: 24px;
+            background-color: aquamarine;
+            border: 1px solid black;
+        }
+
+        .c1{
+            left:20px
+        }
+        .c2{
+            left:30px
+        }
+        .c3{
+            left:40px
+        }
+        .c4{
+            left:60px
+        }
+    }
+}
