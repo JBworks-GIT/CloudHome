@@ -5,10 +5,10 @@ import SignupPage from "./src/pages/signupPage";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import Homepage from "./src/pages/homePage";
-
+import OtpPage from "./src/pages/otpPage";
 
 const AppRouter = () => {
-  const { isAuthorized } = useSelector((e) => e.auth);
+  const { isAuthorized, isEmailVerified } = useSelector((e) => e.auth);
 
   const router = createBrowserRouter([
     {
@@ -20,14 +20,23 @@ const AppRouter = () => {
       element: isAuthorized ? <Navigate to="/" /> : <SignupPage />,
     },
     {
+      path: "/otp",
+      element:
+        isAuthorized && !isEmailVerified ? <OtpPage /> : <Navigate to="/" />,
+    },
+    {
       path: "/",
-      element: isAuthorized ? <Homepage/> : <Navigate to="/login" />,
+      element: isAuthorized ? (
+        <>
+          (isEmailVerified)? <Homepage /> : <Navigate to="/otp" />
+        </>
+      ) : (
+        <Navigate to="/login" />
+      ),
     },
   ]);
 
-  return (
-      <RouterProvider router={router} />
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default AppRouter;
