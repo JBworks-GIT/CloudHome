@@ -11,7 +11,10 @@ const SignupPage = () => {
     margin: "auto",
     padding: "24px",
   };
- 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { signup } = useSignup ();
+
   const handleSubmit = () => {
     const validation = true;
     if (validation) {
