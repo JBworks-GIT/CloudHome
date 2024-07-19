@@ -13,6 +13,7 @@ app.get("/", (req, res) => {
 app.use(cors({origin:true}));
 app.use(express.json());
 app.use("/api/v1/auth", authRouter)
+app.use("/api/v1/otp", otpRouter)
 
 app.listen(process.env.PORT,()=>{
   console.log(`------------------ App Listening at ${process.env.PORT} ---------------`);
