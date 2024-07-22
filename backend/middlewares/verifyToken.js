@@ -31,7 +31,7 @@ const verifyToken = (req,res,next) =>{
         }
         else{
             console.log("----->" +decoded);
-            req.user = {email : decoded.data.email};
+            req.user = {email : decoded.data.email , _id : decoded.data._id };
             next();
         }
     })

@@ -26,6 +26,7 @@ const authSlice = createSlice({
       state.email = user.email; //action.payload.data.user.email
       state.name = user.name; //action.payload.data.user.name
       state.token = token; //action.payload.data.token
+      state.userId = user._id; //action.payload.data.token
       state.isEmailVerified = user.isEmailVerified; //action.payload.data.user.email
       localStorage.setItem("userInfo", JSON.stringify(data));
     },
@@ -38,10 +39,22 @@ const authSlice = createSlice({
       state.isEmailVerified = false; //action.payload.data.user.email
       localStorage.removeItem("userInfo");
     },
+    emailVerified : (state) =>{
+      state.isEmailVerified = true;
+      localStorage.setItem("userInfo", JSON.stringify({
+        user : {
+          email : state.email,
+          name : state.name,
+          isEmailVerified : state.isEmailVerified,
+          _id : state.userId,
+        },
+        token : state.token,
+      }));
+    },
   },
 });
 
-export const { appLogin, appLogout } = authSlice.actions;
+export const { appLogin, appLogout , emailVerified } = authSlice.actions;
 
 const authReducer = authSlice.reducer;
 export default authReducer;

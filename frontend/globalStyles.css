@@ -26,23 +26,24 @@
         .otp-column{
             position: absolute;
             top: 0;
-            height: 42px;
+            height: 44px;
             width: 24px;
             background-color: aquamarine;
-            border: 1px solid black;
+            /* border: 1px solid black; */
         }
 
         .c1{
-            left:20px
+            left:35px
         }
         .c2{
-            left:30px
+            left:95px
         }
         .c3{
-            left:40px
+            left:160px
         }
         .c4{
-            left:60px
+            width: 100px;
+            left:220px
         }
     }
 }

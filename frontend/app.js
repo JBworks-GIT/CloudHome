@@ -11,6 +11,7 @@ const App = () => {
     <Provider store={appStore}>
       <AppRouter/>
     </Provider>
+    
   );
 };
 
