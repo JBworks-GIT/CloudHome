@@ -8,7 +8,9 @@ import Homepage from "./src/pages/homePage";
 import OtpPage from "./src/pages/otpPage";
 const AppRouter = () => {
   const { isAuthorized, isEmailVerified } = useSelector((e) => e.auth);
-
+  // const isAuthorized = true;
+  // const isEmailVerified = true;
+  
   const router = createBrowserRouter([
     {
       path: "/login",
@@ -34,7 +36,7 @@ const AppRouter = () => {
   ]);
 
   return <RouterProvider router={router} />;
-  
+
 };
 
 export default AppRouter;
