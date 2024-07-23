@@ -1,26 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
 import useCreateFolder from "../hooks/useCreateFolder";
+import useGetFileFolders from "../hooks/useGetFileFolders";
 
 const HomePage = () => {
     const [newFolder, setNewFolder] = useState("");
     const [showCreateFolder, setShowCreateFolder] = useState(false);
     const { createFolder } = useCreateFolder();
+    const { getFileFolders, fileFolders } = useGetFileFolders();
+    console.log(fileFolders);
 
     const handleAllowCreateFolder = () => {
         setShowCreateFolder(true);
     };
 
-    const handleCreateFolder = () => {
+    const handleCreateFolder = async () => {
         if (newFolder.length > 0) {
-            createFolder({ name: newFolder });
+            await createFolder({ name: newFolder });
+            setShowCreateFolder(false);
         }
     };
-
+    // useEffect(getFileFolders,[createFolder]); //trial
     return (
         <div>
             <Navbar />
-            <h1>Home</h1>
             <div className="homepage-main-container">
                 <h3>Welcome to Cloud Home</h3>
                 <button onClick={handleAllowCreateFolder}>Create Folder</button>
@@ -35,9 +38,14 @@ const HomePage = () => {
                         </div>
                     )}
                 </div>
+                <div>
+                    {fileFolders.map((elem) => {
+                        return <div>{elem.name}</div>;
+                    })}
+                </div>
             </div>
         </div>
     );
 };
 
-export default Homepage;
+export default HomePage;
