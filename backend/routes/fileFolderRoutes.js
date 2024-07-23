@@ -3,6 +3,6 @@ const { getFileFolders } = require("../controllers/fileFolderControllers");
 
 const fileFolderRouter = express.Router();
 
-fileFolderRouter.route("/").get(getFileFolders);
+fileFolderRouter.route("/").post(getFileFolders);
 
 module.exports = fileFolderRouter;
