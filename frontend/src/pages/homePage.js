@@ -6,7 +6,7 @@ import useUploadFile from "../hooks/useUploadFile";
 
 const HomePage = () => {
   const [newFolder, setNewFolder] = useState("");
-  const inputRef  = useRef(null); //doesnt rerender component but remembers old value
+  const inputRef = useRef(null); //doesnt rerender component but remembers old value
   const [showCreateFolder, setShowCreateFolder] = useState(false);
   const { createFolder } = useCreateFolder();
   const [folderStructure, setFolderStructure] = useState([
@@ -16,13 +16,18 @@ const HomePage = () => {
   const parentFolder = folderStructure[folderStructure.length - 1];
 
   const handleDoubleClick = (elem) => {
-    setFolderStructure([...folderStructure, elem]);
-  };
+    if (elem.type == "folder") {
+        setFolderStructure([...folderStructure, elem]);
+    } else {
+        window.open(elem.link);
+    }
+};
 
   console.log(fileFolders);
 
   const handleAllowCreateFolder = () => {
-    setShowCreateFolder(true);
+
+      setShowCreateFolder(true);
   };
 
   const handleCreateFolder = async () => {
@@ -44,17 +49,18 @@ const HomePage = () => {
     setFolderStructure(newFolderStructure);
   };
 
-  const {uploadFile , isUploadAllowed } = useUploadFile();
+  const { uploadFile, isUploadAllowed } = useUploadFile();
 
-  const handleFileUpload = (e) => {
-    if (isUploadAllowed) {	
-               const file = e.target.files;
-               uploadFile({file: file[0], parentId : parentFolder._id} );
-           } else {
-               alert("Uploading is already in progress. Please wait...");
-           }
-    };
-    
+  const handleFileUpload = async (e) => {
+    if (isUploadAllowed) {
+      const file = e.target.files;
+      await uploadFile({ file: file[0], parentId: parentFolder._id });
+      getFileFolders(parentFolder._id);
+    } else {
+      alert("Uploading is already in progress. Please wait...");
+    }
+  };
+
   return (
     <div>
       <Navbar />

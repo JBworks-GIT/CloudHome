@@ -1,5 +1,5 @@
-import {useNavigate}  from "react-router-dom";
- 
+import { useNavigate } from "react-router-dom";
+
 const useSignup = () => {
   const navigate = useNavigate();
   const signup = async ({ email, password }) => {
@@ -14,14 +14,13 @@ const useSignup = () => {
       console.log(res);
       const data = await res.json();
       console.log(data);
-      if(data.status === "success"){
+      if (data.status === "success") {
         navigate(`/login?email=${email}`);
-      }
-      else{
+      } else {
         alert(data.message);
       }
     } catch (err) {
-        console.log(err);
+      console.log(err);
       alert("Signup error " + err.message);
     }
   };
