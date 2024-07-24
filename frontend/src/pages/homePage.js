@@ -1,17 +1,17 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
 import useCreateFolder from "../hooks/useCreateFolder";
 import useGetFileFolders from "../hooks/useGetFileFolders";
-import useUploadFile from "../hooks/useUploadFile";
 
 const HomePage = () => {
   const [newFolder, setNewFolder] = useState("");
+<<<<<<< HEAD
   const inputRef = useRef(null); //doesnt rerender component but remembers old value
+=======
+>>>>>>> parent of 147dfaf (uploading files)
   const [showCreateFolder, setShowCreateFolder] = useState(false);
   const { createFolder } = useCreateFolder();
-  const [folderStructure, setFolderStructure] = useState([
-    { _id: null, name: "Cloud Home" },
-  ]);
+  const [folderStructure, setFolderStructure] = useState([{ _id: null }]);
   const { getFileFolders, fileFolders } = useGetFileFolders();
   const parentFolder = folderStructure[folderStructure.length - 1];
 
@@ -41,6 +41,7 @@ const HomePage = () => {
   useEffect(() => {
     getFileFolders(parentFolder._id);
   }, [folderStructure]);
+<<<<<<< HEAD
 
   const handleBackClick = (clickIdx) => {
     const newFolderStructure = folderStructure.filter(
@@ -61,23 +62,16 @@ const HomePage = () => {
     }
   };
 
+=======
+>>>>>>> parent of 147dfaf (uploading files)
   return (
     <div>
       <Navbar />
       <div className="homepage-main-container">
         <h3>Welcome to Cloud Home</h3>
         <button onClick={handleAllowCreateFolder}>Create Folder</button>
-        <input
-          className="file-upload-input"
-          ref={inputRef}
-          type="file"
-          onChange={handleFileUpload}
-        />
-        <ul style={{ display: "flex", padding: "24px", gap: "24px" }}>
-          {folderStructure.map((elem, idx) => {
-            return <li onClick={() => handleBackClick(idx)}>{elem.name}</li>; //flatmap(read at home)
-          })}
-        </ul>
+        <button>Upload File</button>
+        <h4>Cloud Home</h4>
         <div>
           {showCreateFolder && (
             <div
@@ -98,11 +92,7 @@ const HomePage = () => {
         </div>
         <div>
           {fileFolders.map((elem) => {
-            return (
-              <div onDoubleClick={() => handleDoubleClick(elem)}>
-                {elem.name}
-              </div>
-            );
+            return <div onDoubleClick={()=>handleDoubleClick(elem)}>{elem.name}</div>;
           })}
         </div>
       </div>

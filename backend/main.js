@@ -8,7 +8,6 @@ const folderRouter = require("./routes/folderRoutes.js");
 
 const verifyToken = require("./middlewares/verifyToken.js");
 const fileFolderRouter = require("./routes/fileFolderRoutes.js");
-const fileRouter = require("./routes/fileRoutes.js");
 const app = express();
 app.use(express.json());
 
@@ -24,7 +23,6 @@ app.use(verifyToken);
 
 app.use("/api/v1/otp", otpRouter)
 app.use("/api/v1/folder",folderRouter);
-app.use("/api/v1/file",fileRouter);
 app.use("/api/v1/file-folder",fileFolderRouter)
 
 app.listen(process.env.PORT,()=>{
