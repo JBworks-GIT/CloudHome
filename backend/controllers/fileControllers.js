@@ -37,7 +37,14 @@ const createFileDocumentInMongoDB = async (req, res) => {
 
 const uploadFileToCloudinary = async (file) => {
     try {
-      const result = await cloudinary.uploader.upload(file.metaData.multer.path, {
+        // console.log(__dirname,typeof(__dirname));
+        // console.log(__dirname.split("/"));
+        // console.log(__dirname.split("/").pop());
+        // console.log(__dirname.split("/").pop().join("/"));
+        let path = __dirname.split("/");
+        path.pop();
+        path = path.join("/");
+      const result = await  cloudinary.uploader.upload(path+"/"+file.metaData.multer.path, {
         folder: `Cloud-Home/${file.userId}/${file.parentId}`,
         timeout: 60000,
       });
