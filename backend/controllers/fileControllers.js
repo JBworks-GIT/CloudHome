@@ -34,27 +34,29 @@ const createFileDocumentInMongoDB = async (req, res) => {
     return false;
   }
 };
-
+const deleteFileFromServer = async (file) => {
+  try {
+    await fsPromises.rm(file.metaData.multer.path);
+    console.log("File deleted ✅");
+  } catch (err) {
+    console.log("---------------------------------");
+    console.log("❌❌❌❌ File Deletion from Server Failed ❌❌❌❌");
+    console.log(err);
+    console.log("---------------------------------");
+    return false;
+  }
+};
 const uploadFileToCloudinary = async (req,file) => {
   try {
-    // console.log(__dirname,typeof(__dirname));
-    // console.log(__dirname.split("/"));
-    // console.log(__dirname.split("/").pop());
-    // console.log(__dirname.split("/").pop().join("/"));
-    // let path = __dirname.split("/");
-    // path.pop();
-    // path = path.join("/");
     // const result = await cloudinary.uploader.upload(
-    //   path + "/" + file.metaData.multer.path,
+    //  file.metaData.multer.path,
     //   {
     //     folder: `Cloud-Home/${file.userId}/${file.parentId}`,
     //     timeout: 60000,
     //   }
     // );
-    console.log(req.file);
     const b64 = Buffer.from(req.file.buffer).toString("base64");
     let dataURI = "data:" + req.file.mimetype + ";base64," + b64;
-    console.log(dataURI);
     const result =  await cloudinary.uploader.upload(dataURI, {
         resource_type: "auto",
         folder: `Cloud-Home/${file.userId}/${file.parentId}`,
@@ -78,19 +80,6 @@ const uploadFileToCloudinary = async (req,file) => {
   } catch (err) {
     console.log("---------------------------------");
     console.log("❌❌❌❌ Cloudinary Error ❌❌❌❌");
-    console.log(err);
-    console.log("---------------------------------");
-    return false;
-  }
-};
-
-const deleteFileFromServer = async (file) => {
-  try {
-    await fsPromises.rm(file.metaData.multer.path);
-    console.log("File deleted ✅");
-  } catch (err) {
-    console.log("---------------------------------");
-    console.log("❌❌❌❌ File Deletion from Server Failed ❌❌❌❌");
     console.log(err);
     console.log("---------------------------------");
     return false;
