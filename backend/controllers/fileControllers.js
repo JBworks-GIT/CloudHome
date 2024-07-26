@@ -6,9 +6,7 @@ const createFileDocumentInMongoDB = async (req, res) => {
     try {
         const data = req.file;
         const { parentId } = req.body;
-
         const { _id } = req.user;
-
         const file = await FileFolderModel.create({
             name: data.originalname,
             userId: _id,
@@ -16,7 +14,6 @@ const createFileDocumentInMongoDB = async (req, res) => {
             parentId: parentId === "null" ? undefined : parentId,
             metaData: { multer: data },
         });
-
         res.status(201);
         res.json({
             status: "in-progress",
@@ -40,10 +37,10 @@ const createFileDocumentInMongoDB = async (req, res) => {
 
 const uploadFileToCloudinary = async (file) => {
     try {
-        const result = await cloudinary.uploader.upload(file.metaData.multer.path, {
-            folder: `Cloud-Home/${file.userId}/${file.parentId}`,
-            timeout: 60000,
-        });
+      const result = await cloudinary.uploader.upload(file.metaData.multer.path, {
+        folder: `Cloud-Home/${file.userId}/${file.parentId}`,
+        timeout: 60000,
+      });
 
         try {
             await FileFolderModel.findByIdAndUpdate(file._id, {
@@ -100,5 +97,4 @@ const createFile = async (req, res) => {
         });
     }
 };
-
 module.exports = { createFile };
