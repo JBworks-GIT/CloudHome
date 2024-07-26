@@ -11,7 +11,7 @@ const verifyToken = (req,res,next) =>{
         return;
     }
     const token= authorization?.split(" ")?.[1];
-    console.log(authorization);
+    // console.log(authorization);
     if(!token){
         res.status(401).json({
             status : "fail",
