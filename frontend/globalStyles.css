@@ -47,14 +47,3 @@
         }
     }
 }
-
-.signup-login {
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-    font-weight: bold;
-  }
-  .signup-login a {
-    color: rgb(146, 224, 30);
-    text-decoration: none;
-  }
