@@ -1,7 +1,9 @@
 import { useState } from "react";
 import useSignup from "../hooks/useSignup";
+import { useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
+  const navigate = useNavigate();
   const loginPageStyles = {
     display: "flex",
     flexDirection: "column",
@@ -52,6 +54,7 @@ const SignupPage = () => {
   };
 
   return (
+    <>
     <div style={loginPageStyles}>
       <h1>Sign Up</h1>
       <input
@@ -72,6 +75,12 @@ const SignupPage = () => {
         Sign Up
       </button>
     </div>
+    <div className="signup-login">
+    <footer >
+      Already have an Account? <a onClick={() => (navigate('/login'))} > Login</a>
+    </footer>
+  </div>
+  </>
   );
 };
 

@@ -1,7 +1,9 @@
 import { useState } from "react";
 import useLogin from "../hooks/useLogin";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const loginPageStyles = {
     display: "flex",
     flexDirection: "column",
@@ -52,6 +54,7 @@ const LoginPage = () => {
   };
 
   return (
+    <>
     <div style={loginPageStyles}>
       <h1>Login</h1>
       <input
@@ -71,7 +74,14 @@ const LoginPage = () => {
       <button onClick={handleSubmit} style={buttonStyles}>
         Login
       </button>
+      
     </div>
+    <div className="signup-login">
+    <footer>
+      Don't have an account? <a onClick={() => (navigate('/signup'))} > Signup</a>
+    </footer>
+  </div>
+  </>
   );
 };
 
